@@ -1,0 +1,157 @@
+﻿<Window x:Class="FlashcardsSharp.BuildFlashcardSetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlashcardsSharp"
+        mc:Ignorable="d" FontFamily="Segoe UI" FontWeight="Light"
+        Title="Flashcards Sharp - Create Set" Height="600" Width="1000" MinHeight="600" MinWidth="1000"
+        FontSize="16" Background="#FAFAFA" WindowStartupLocation="CenterScreen" Foreground="#646469"
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="85"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.RowSpan="2" Grid.ColumnSpan="3">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="25" ShadowDepth="0" Opacity="0.8"/>
+            </Grid.Effect>
+
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#73236E" Offset="0"/>
+                    <GradientStop Color="#C34632" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Height="64" Source="{StaticResource TransparentWhiteIcon}" Margin="0,0,10,0"/>
+            <TextBlock Grid.Column="1" Foreground="#FFF" FontSize="32" Text="Flashcards Sharp - Create Set" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Column="1" Grid.Row="1" BorderBrush="#c3c3c3" BorderThickness="1" Background="#FFF">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.5"/>
+                </Border.Effect>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="25"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Set name background -->
+                    <Border Background="#f0f0f0" Grid.ColumnSpan="7" Grid.RowSpan="3"/>
+                    
+                    <!-- Set name container -->
+                    <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock FontSize="24" Margin="0,0,10,0" Text="Set Name:"/>
+                        <TextBox x:Name="setNameText" FontSize="24" Grid.Column="1"/>
+                    </Grid>
+
+                    <!-- Input area -->
+                    <Grid Grid.Column="1" Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Term:" Margin="0,0,10,0"/>
+                            <TextBox x:Name="termText" Grid.Column="1"/>
+                        </Grid>
+
+                        <TextBlock Grid.Row="3" Text="Definition:"/>
+                        <TextBox x:Name="definitionText" Grid.Row="4" AcceptsReturn="True" TextWrapping="Wrap"/>
+                        <Button x:Name="addToSetButton" Grid.Row="6" Content="Add To Set" Click="AddToSetButton_Click"/>
+                    </Grid>
+
+                    <!-- Vertical seperator -->
+                    <StackPanel HorizontalAlignment="Center" Grid.Column="3" Grid.Row="4" Orientation="Horizontal">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+
+                    <!-- List area -->
+                    <Grid Grid.Column="5" Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Flashcards in Set:"/>
+                        <ListBox x:Name="flashcardsSetListBox" Grid.Row="1"/>
+
+                        <Button x:Name="moveFlashcardUpButton" Grid.Row="3" Content="Move Selected Flashcard Up" Click="MoveFlashcardUpButton_Click"/>
+                        <Button x:Name="moveFlashcardDownButton" Grid.Row="5" Content="Move Selected Flashcard Down" Click="MoveFlashcardDownButton_Click"/>
+                        <Button x:Name="removeSelectedFlashcardButton" Grid.Row="7" Content="Remove Selected Flashcard" Click="RemoveSelectedFlashcardButton_Click"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Button Style="{StaticResource PinkButton}" x:Name="saveFlashcardSetButton" Grid.Column="1" Grid.Row="3" Content="Save Flashcard Set" HorizontalAlignment="Right" Height="50" Width="200" Click="SaveFlashcardSetButton_Click"/>
+        </Grid>
+    </Grid>
+</Window>

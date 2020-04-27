@@ -1,0 +1,140 @@
+﻿<Window x:Class="FlashcardsSharp.StudyFlashcardSetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlashcardsSharp"
+        mc:Ignorable="d" FontFamily="Segoe UI" FontWeight="Light"
+        Title="Flashcards Sharp - Study" Height="600" Width="1000" FontSize="16" Background="#FAFAFA"
+        WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="85"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.RowSpan="2" Grid.ColumnSpan="3">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="25" ShadowDepth="0" Opacity="0.8"/>
+            </Grid.Effect>
+
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#73236E" Offset="0"/>
+                    <GradientStop Color="#C34632" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Height="64" Source="{StaticResource TransparentWhiteIcon}" Margin="0,0,10,0"/>
+            <TextBlock Grid.Column="1" Foreground="#FFF" FontSize="32" Text="Flashcards Sharp - Study" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Column="1" Grid.Row="1" CornerRadius="5" Background="#FFF">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.5"/>
+                </Border.Effect>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="25"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- BEGIN LEFT SIDEBAR -->
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Flashcard Sets:"/>
+                            <ListBox x:Name="flashcardSetListBox"  Grid.Row="1" SelectionChanged="FlashcardSetListBox_SelectionChanged"/>
+                            <Button x:Name="LoadSetButton" Grid.Row="3" Content="Load Set" Click="LoadSetButton_Click"/>
+                        </Grid>
+                    </Grid>
+                    <!-- END LEFT SIDEBAR -->
+
+                    <!-- BEGIN FLASHCARD INTERACTIVE AREA -->
+                    <Grid Grid.Column="3" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="25"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Flashcard Set Title -->
+                        <TextBlock x:Name="setTitle" TextAlignment="Center" Foreground="#7D7D7D" FontFamily="Segoe UI Light" FontSize="28" Grid.Column="2" Text="Title Here"/>
+
+                        <!-- Previous Flashcard Button -->
+                        <Button x:Name="previousFlashcardButton" Grid.Row="2" Content="&#8592;" Click="PreviousFlashcardButton_Click"/>
+
+                        <!-- Flashcard -->
+                        <Border x:Name="flashcardContainer" Cursor="No" Grid.Column="2" Grid.Row="2" CornerRadius="0" Background="#fafafa" MouseLeftButtonUp="Border_MouseLeftButtonUp">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.5"/>
+                            </Border.Effect>
+
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <TextBlock x:Name="flashcardText" Foreground="#7D7D7D" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Padding="25" Text="Load A Set To Start Studying..."/>
+                            </ScrollViewer>
+                        </Border>
+
+                        <!-- Next Flashcard Button -->
+                        <Button x:Name="nextFlashcardButton" Grid.Column="4" Grid.Row="2" Content="&#8594;" Click="NextFlashcardButton_Click"/>
+
+                        <!-- Progress Text -->
+                        <TextBlock x:Name="progressText" Grid.Column="2" Grid.Row="4" Foreground="#7D7D7D" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0/0"/>
+                    </Grid>
+                    <!-- END FLASHCARD INTERACTIVE AREA -->
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
