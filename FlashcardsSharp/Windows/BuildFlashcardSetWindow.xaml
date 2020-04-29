@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlashcardsSharp"
         mc:Ignorable="d" FontFamily="Segoe UI" FontWeight="Light"
-        Title="Flashcards Sharp - Create Set" Height="600" Width="1000" MinHeight="600" MinWidth="1000"
+        Title="Flashcards Sharp - Create Flashcard Set" Height="600" Width="1000" MinHeight="600" MinWidth="1000"
         FontSize="16" Background="#FAFAFA" WindowStartupLocation="CenterScreen" Foreground="#646469"
         Closing="Window_Closing">
     <Grid>
@@ -41,7 +41,7 @@
             </Grid.ColumnDefinitions>
 
             <Image Height="64" Source="{StaticResource TransparentWhiteIcon}" Margin="0,0,10,0"/>
-            <TextBlock Grid.Column="1" Foreground="#FFF" FontSize="32" Text="Flashcards Sharp - Create Set" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Foreground="#FFF" FontSize="32" Text="Flashcards Sharp - Create Flashcard Set" VerticalAlignment="Center"/>
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
@@ -141,7 +141,7 @@
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Margin="0,0,0,2.5" Text="Flashcards in Set:"/>
+                        <TextBlock Text="Flashcards in Set:"/>
                         <ListBox x:Name="flashcardsSetListBox" Grid.Row="1"/>
 
                         <Button x:Name="moveFlashcardUpButton" Grid.Row="3" Content="Move Selected Flashcard Up" Click="MoveFlashcardUpButton_Click"/>

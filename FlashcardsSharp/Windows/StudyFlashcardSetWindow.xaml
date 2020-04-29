@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlashcardsSharp"
         mc:Ignorable="d" FontFamily="Segoe UI" FontWeight="Light"
-        Title="Flashcards Sharp - Study" Height="600" Width="1000" FontSize="16" Background="#FAFAFA"
-        WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+        Title="Flashcards Sharp - Study Flashcard Sets" Height="600" Width="1000" MinHeight="600" MinWidth="1000" FontSize="16" Background="#FAFAFA"
+        WindowStartupLocation="CenterScreen" Foreground="#646469" Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25"/>
@@ -40,7 +40,7 @@
             </Grid.ColumnDefinitions>
 
             <Image Height="64" Source="{StaticResource TransparentWhiteIcon}" Margin="0,0,10,0"/>
-            <TextBlock Grid.Column="1" Foreground="#FFF" FontSize="32" Text="Flashcards Sharp - Study" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Foreground="#FFF" FontSize="32" Text="Flashcards Sharp - Study Flashcard Sets" VerticalAlignment="Center"/>
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
@@ -64,6 +64,8 @@
                         <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="25"/>
                     </Grid.ColumnDefinitions>
@@ -78,21 +80,29 @@
                     <Grid Grid.Column="1" Grid.Row="1">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
                             <TextBlock Text="Flashcard Sets:"/>
                             <ListBox x:Name="flashcardSetListBox"  Grid.Row="1" SelectionChanged="FlashcardSetListBox_SelectionChanged"/>
-                            <Button x:Name="LoadSetButton" Grid.Row="3" Content="Load Set" Click="LoadSetButton_Click"/>
+                            <Button x:Name="loadSetButton" Grid.Row="3" Content="Load Set" Click="LoadSetButton_Click"/>
+                            <Button x:Name="unloadCurrentSetButton" Grid.Row="5" Content="Unload Current Set" Click="UnloadCurrentSetButton_Click"/>
                         </Grid>
                     </Grid>
                     <!-- END LEFT SIDEBAR -->
 
+                    <!-- Vertical seperator -->
+                    <StackPanel HorizontalAlignment="Center" Grid.Column="3" Grid.Row="1" Orientation="Horizontal">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+
                     <!-- BEGIN FLASHCARD INTERACTIVE AREA -->
-                    <Grid Grid.Column="3" Grid.Row="1">
+                    <Grid Grid.Column="5" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="25"/>
@@ -113,7 +123,7 @@
                         <TextBlock x:Name="setTitle" TextAlignment="Center" Foreground="#7D7D7D" FontFamily="Segoe UI Light" FontSize="28" Grid.Column="2" Text="Load a set to start studying..."/>
 
                         <!-- Previous Flashcard Button -->
-                        <Button x:Name="previousFlashcardButton" Grid.Row="2" Content="&#8592;" Click="PreviousFlashcardButton_Click"/>
+                        <Button x:Name="previousFlashcardButton" Grid.Row="2" FontSize="24" Content="&#8592;" Click="PreviousFlashcardButton_Click"/>
 
                         <!-- Flashcard -->
                         <Border x:Name="flashcardContainer" Cursor="No" Grid.Column="2" Grid.Row="2" CornerRadius="0" Background="#fafafa" MouseLeftButtonUp="FlashcardContainer_MouseLeftButtonUp">
@@ -127,7 +137,7 @@
                         </Border>
 
                         <!-- Next Flashcard Button -->
-                        <Button x:Name="nextFlashcardButton" Grid.Column="4" Grid.Row="2" Content="&#8594;" Click="NextFlashcardButton_Click"/>
+                        <Button x:Name="nextFlashcardButton" Grid.Column="4" Grid.Row="2" FontSize="24" Content="&#8594;" Click="NextFlashcardButton_Click"/>
 
                         <!-- Progress Text -->
                         <TextBlock x:Name="progressText" Grid.Column="2" Grid.Row="4" Foreground="#7D7D7D" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0/0"/>

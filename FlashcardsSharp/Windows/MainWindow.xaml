@@ -80,7 +80,7 @@
 
                         <!-- Buttons -->
                         <Button x:Name="createFlashcardsSetButton" Style="{StaticResource MenuButton}" HorizontalContentAlignment="Left" Content="Create Flashcard Set" Margin="0,0,0,10" Click="CreateFlashcardsSetButton_Click"/>
-                        <Button x:Name="studyFlashcardSetButton" Style="{StaticResource MenuButton}" HorizontalContentAlignment="Left" Content="Study Flashcard Set" Margin="0,0,0,10" Click="StudyFlashcardSetButton_Click"/>
+                        <Button x:Name="studyFlashcardSetsButton" Style="{StaticResource MenuButton}" HorizontalContentAlignment="Left" Content="Study Flashcard Sets" Margin="0,0,0,10" Click="StudyFlashcardSetsButton_Click"/>
                         <Button x:Name="quitApplicationButton" Style="{StaticResource MenuButton}" HorizontalContentAlignment="Left" Content="Quit Application" Click="QuitApplicationButton_Click"/>
                     </StackPanel>
                 </Grid>

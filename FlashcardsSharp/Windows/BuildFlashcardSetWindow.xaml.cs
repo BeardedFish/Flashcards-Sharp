@@ -75,6 +75,19 @@ namespace FlashcardsSharp
         }
 
         /// <summary>
+        /// Swaps two Flashcard objects in the list box on the window via their index numbers.
+        /// </summary>
+        /// <param name="index1">The index in the list box to be swapped with index #2.</param>
+        /// <param name="index2">The index in the list box to be swapped with index #1.</param>
+        private void SwapFlashcards(int index1, int index2)
+        {
+            Flashcard tempFlashcard = (Flashcard)flashcardsSetListBox.Items[index1];
+
+            flashcardsSetListBox.Items[index1] = flashcardsSetListBox.Items[index2];
+            flashcardsSetListBox.Items[index2] = tempFlashcard;
+        }
+
+        /// <summary>
         /// Event handler for when the "Add To Set" button is clicked.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
@@ -122,8 +135,6 @@ namespace FlashcardsSharp
 
             if (saveDialog.ShowDialog() == true) // Ok button was pressed on the dialog
             {
-                MessageBox.Show(flashcardsSetJson);
-
                 try
                 {
                     File.WriteAllText(saveDialog.FileName, flashcardsSetJson);
@@ -153,33 +164,6 @@ namespace FlashcardsSharp
             }
 
             ToggleListBoxButtons();
-        }
-
-        /// <summary>
-        /// Event handler for when a key is held down on the window.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            // Add a flashcard to the set list if the user presses the enter key
-            if (e.Key == Key.Enter)
-            {
-                AddFlashcardToSet();
-            }
-        }
-
-        /// <summary>
-        /// Swaps two Flashcard objects in the list box on the window via their index numbers.
-        /// </summary>
-        /// <param name="index1"></param>
-        /// <param name="index2"></param>
-        private void SwapFlashcards(int index1, int index2)
-        {
-            Flashcard tempFlashcard = (Flashcard)flashcardsSetListBox.Items[index1];
-
-            flashcardsSetListBox.Items[index1] = flashcardsSetListBox.Items[index2];
-            flashcardsSetListBox.Items[index2] = tempFlashcard;
         }
 
         /// <summary>
@@ -240,6 +224,20 @@ namespace FlashcardsSharp
 
             // Update the selected item index
             flashcardsSetListBox.SelectedItem = flashcardsSetListBox.Items.GetItemAt(lowerIndex);
+        }
+
+        /// <summary>
+        /// Event handler for when a key is held down on the window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            // Add a flashcard to the set list if the user presses the enter key
+            if (e.Key == Key.Enter)
+            {
+                AddFlashcardToSet();
+            }
         }
 
         /// <summary>

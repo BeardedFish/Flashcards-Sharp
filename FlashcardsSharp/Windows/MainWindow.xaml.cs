@@ -36,11 +36,11 @@ namespace FlashcardsSharp
         }
 
         /// <summary>
-        /// Event handler for when the "Study Flashcard Set" button is clicked.
+        /// Event handler for when the "Study Flashcard Sets" button is clicked.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
         /// <param name="e">The event arguments for when the button is clicked.</param>
-        private void StudyFlashcardSetButton_Click(object sender, RoutedEventArgs e)
+        private void StudyFlashcardSetsButton_Click(object sender, RoutedEventArgs e)
         {
             // Hide the main window
             this.Hide();

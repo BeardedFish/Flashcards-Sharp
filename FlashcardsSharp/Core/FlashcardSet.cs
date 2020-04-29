@@ -6,6 +6,7 @@
  * Date Created: Friday, April 27, 2020
  */
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace FlashcardsSharp.Core
             {
                 FlashcardSet objFlashcard = (FlashcardSet)obj;
 
-                bool isListsEqual = Enumerable.SequenceEqual(objFlashcard.FlashcardsList.OrderBy(e => e), this.FlashcardsList.OrderBy(e => e));
+                bool isListsEqual = this.FlashcardsList.SequenceEqual(objFlashcard.FlashcardsList);
                 if (objFlashcard.SetName.Equals(this.SetName) && isListsEqual)
                 {
                     return true;
@@ -64,12 +65,7 @@ namespace FlashcardsSharp.Core
         /// <returns>An int that represents the unique hash code of this flashcard set.</returns>
         public override int GetHashCode()
         {
-            var hashCode = 709270232;
-
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(SetName);
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<Flashcard>>.Default.GetHashCode(FlashcardsList);
-
-            return hashCode;
+            return (SetName, FlashcardsList).GetHashCode();
         }
 
         /// <summary>

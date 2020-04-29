@@ -48,6 +48,7 @@ namespace FlashcardsSharp
         public StudyFlashcardSetWindow(MainWindow mainWindow)
         {
             InitializeComponent();
+            ToggleUnloadCurrentSetButton();
             ToggleNavigationButtons();
 
             this.mainWindow = mainWindow;
@@ -72,6 +73,8 @@ namespace FlashcardsSharp
             if (currentFlashcardSet == null || currentFlashcardSet.FlashcardsList.Count == 0) // If no flashcard is loaded, set the cursor for the flashcard container to the "No" cursor
             {
                 flashcardContainer.Cursor = Cursors.No;
+                setTitle.Text = "Load a set to start studying...";
+                flashcardText.Text = "";
 
                 return;
             }
@@ -99,6 +102,14 @@ namespace FlashcardsSharp
         {
             previousFlashcardButton.IsEnabled = (flashcardsListCurrentIndex > 0) ? true : false;
             nextFlashcardButton.IsEnabled = (flashcardsListCurrentIndex < (currentFlashcardSet == null ? -1 : currentFlashcardSet.FlashcardsList.Count - 1)) ? true : false;
+        }
+
+        /// <summary>
+        /// Toggles the enable/disable status of the "Unload Current Set" button.
+        /// </summary>
+        private void ToggleUnloadCurrentSetButton()
+        {
+            unloadCurrentSetButton.IsEnabled = (flashcardSetListBox.Items.Count > 0) ? true : false;
         }
 
         /// <summary>
@@ -186,6 +197,7 @@ namespace FlashcardsSharp
                         currentFlashcardSet = set;
 
                         // Update the UI to show the changes visually
+                        ToggleUnloadCurrentSetButton();
                         UpdateFlashcardUI();
 
                         // Let the user know the flashcard set was loaded succesfully
@@ -198,6 +210,37 @@ namespace FlashcardsSharp
                     // Show message to the user
                     MessageBox.Show("An error occured while trying to parse the file '" + openDialog.FileName + "' which resulted in the flashcard set not being loaded into the program.\n\nException message: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Event handler for when the "Unload Current Set" button is clicked.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments for when the button is clicked.</param>
+        private void UnloadCurrentSetButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (flashcardSetListBox.Items.Count > 0)
+            {
+                int selectedIndex = flashcardSetListBox.Items.IndexOf(currentFlashcardSet);
+
+                flashcardSetListBox.Items.RemoveAt(selectedIndex);
+
+                if (flashcardSetListBox.Items.Count > 0)
+                {
+                    flashcardSetListBox.SelectedIndex = 0;
+                }
+                else
+                {
+                    currentFlashcardSet = null;
+                }
+
+                currentFlashcardState = FlashcardState.Term;
+                flashcardsListCurrentIndex = 0;
+
+                ToggleUnloadCurrentSetButton();
+
+                UpdateFlashcardUI();
             }
         }
 

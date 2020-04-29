@@ -62,12 +62,8 @@ namespace FlashcardsSharp.Core
         /// <returns>An int that represents the unique hash code of this flashcard.</returns>
         public override int GetHashCode()
         {
-            var hashCode = -2081631409;
+            return (Term, Definition).GetHashCode();
 
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Term);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Definition);
-
-            return hashCode;
         }
 
         /// <summary>
