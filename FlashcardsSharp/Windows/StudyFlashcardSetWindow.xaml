@@ -54,7 +54,7 @@
                 <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Column="1" Grid.Row="1" CornerRadius="5" Background="#FFF">
+            <Border Grid.Column="1" Grid.Row="1" Background="#FFF">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.5"/>
                 </Border.Effect>
@@ -110,19 +110,19 @@
                         </Grid.RowDefinitions>
 
                         <!-- Flashcard Set Title -->
-                        <TextBlock x:Name="setTitle" TextAlignment="Center" Foreground="#7D7D7D" FontFamily="Segoe UI Light" FontSize="28" Grid.Column="2" Text="Title Here"/>
+                        <TextBlock x:Name="setTitle" TextAlignment="Center" Foreground="#7D7D7D" FontFamily="Segoe UI Light" FontSize="28" Grid.Column="2" Text="Load a set to start studying..."/>
 
                         <!-- Previous Flashcard Button -->
                         <Button x:Name="previousFlashcardButton" Grid.Row="2" Content="&#8592;" Click="PreviousFlashcardButton_Click"/>
 
                         <!-- Flashcard -->
-                        <Border x:Name="flashcardContainer" Cursor="No" Grid.Column="2" Grid.Row="2" CornerRadius="0" Background="#fafafa" MouseLeftButtonUp="Border_MouseLeftButtonUp">
+                        <Border x:Name="flashcardContainer" Cursor="No" Grid.Column="2" Grid.Row="2" CornerRadius="0" Background="#fafafa" MouseLeftButtonUp="FlashcardContainer_MouseLeftButtonUp">
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.5"/>
                             </Border.Effect>
 
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                <TextBlock x:Name="flashcardText" Foreground="#7D7D7D" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Padding="25" Text="Load A Set To Start Studying..."/>
+                                <TextBlock x:Name="flashcardText" Foreground="#7D7D7D" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Padding="25" Text=""/>
                             </ScrollViewer>
                         </Border>
 

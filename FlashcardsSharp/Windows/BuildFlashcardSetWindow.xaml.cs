@@ -18,9 +18,6 @@ using FlashcardsSharp.Core;
 
 namespace FlashcardsSharp
 {
-    /// <summary>
-    /// Interaction logic for BuildFlashcardSetWindow.xaml
-    /// </summary>
     public partial class BuildFlashcardSetWindow : Window
     {
         /// <summary>

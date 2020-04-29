@@ -53,7 +53,7 @@
                             </Trigger>
                         </ControlTemplate.Triggers>
 
-                        <Border Background="{TemplateBinding Background}" BorderBrush="#c3c3c3" BorderThickness="1" Padding="2.5">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="#777777" BorderThickness="1" Padding="2.5">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -109,7 +109,7 @@
                             </Trigger>
                         </ControlTemplate.Triggers>
 
-                        <Border Background="{TemplateBinding Background}" BorderBrush="#c3c3c3" BorderThickness="1" Padding="25">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="#777777" BorderThickness="1" Padding="25">
                             <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -120,8 +120,8 @@
         <Style x:Key="PinkButton" TargetType="Button">
             <Style.Resources>
                 <LinearGradientBrush x:Key="DefaultBackground" StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#fa6473" Offset="0"/>
-                    <GradientStop Color="#eb3c46" Offset="1"/>
+                    <GradientStop Color="#1ef078" Offset="0"/>
+                    <GradientStop Color="#28aa64" Offset="1"/>
                 </LinearGradientBrush>
 
                 <LinearGradientBrush x:Key="HoverBackground" StartPoint="0,0" EndPoint="0,1">
@@ -165,7 +165,7 @@
                             </Trigger>
                         </ControlTemplate.Triggers>
 
-                        <Border Background="{TemplateBinding Background}" BorderBrush="#c3c3c3" BorderThickness="1" Padding="2.5">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="#007731" BorderThickness="1" Padding="2.5">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>

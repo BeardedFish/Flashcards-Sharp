@@ -10,6 +10,29 @@ namespace FlashcardsSharp.Core
 {
     public static class HelperClass
     {
-        public const string DialogFilter = "JSON Files (*.json)|*.json";
+        /// <summary>
+        /// The dialog filter for the open/save dialogs that this program uses.
+        /// </summary>
+        public const string DialogFilter = "JSON Files (*.json)|*.json|All files (*.*)|*.*";
+
+        /// <summary>
+        /// The JSON property name for the FlashcardsList object.
+        /// </summary>
+        public const string FlashcardsListJsonPropertyName = "flashcardsList";
+
+        /// <summary>
+        /// The JSON property name for the string that represents the set name.
+        /// </summary>
+        public const string SetNameJsonPropertyName = "setName";
+
+        /// <summary>
+        /// The JSON property name for the stirng that represents the term of a flashcard.
+        /// </summary>
+        public const string TermJsonPropertyName = "term";
+
+        /// <summary>
+        /// The JSON property name for the string that represents the definition of a flashcard.
+        /// </summary>
+        public const string DefinitionJsonPropertyName = "definition";
     }
 }

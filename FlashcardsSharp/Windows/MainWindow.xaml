@@ -76,12 +76,12 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
-                        <TextBlock Foreground="#BDBDBD" FontSize="32" FontWeight="SemiBold" Text="What would you like to do?" Margin="0,0,0,15"/>
+                        <TextBlock Foreground="#BDBDBD" FontSize="32" FontWeight="SemiBold" Text="What would you like to do?" Margin="0,0,0,25"/>
 
                         <!-- Buttons -->
-                        <Button x:Name="createFlashcardsSetButton" Style="{StaticResource MenuButton}" HorizontalContentAlignment="Left" Content="Create Flashcard Set" Margin="0,0,0,5" Click="CreateFlashcardsSetButton_Click"/>
-                        <Button x:Name="studyFlashcardSetButton" Style="{StaticResource MenuButton}" HorizontalContentAlignment="Left" Content="Study Flashcard Set" Margin="0,0,0,5" Click="StudyFlashcardSetButton_Click"/>
-                        <Button x:Name="quitApplicationButton" Style="{StaticResource MenuButton}" HorizontalContentAlignment="Left" Content="Quit Application" Margin="0,0,0,5" Click="QuitApplicationButton_Click"/>
+                        <Button x:Name="createFlashcardsSetButton" Style="{StaticResource MenuButton}" HorizontalContentAlignment="Left" Content="Create Flashcard Set" Margin="0,0,0,10" Click="CreateFlashcardsSetButton_Click"/>
+                        <Button x:Name="studyFlashcardSetButton" Style="{StaticResource MenuButton}" HorizontalContentAlignment="Left" Content="Study Flashcard Set" Margin="0,0,0,10" Click="StudyFlashcardSetButton_Click"/>
+                        <Button x:Name="quitApplicationButton" Style="{StaticResource MenuButton}" HorizontalContentAlignment="Left" Content="Quit Application" Click="QuitApplicationButton_Click"/>
                     </StackPanel>
                 </Grid>
             </Border>

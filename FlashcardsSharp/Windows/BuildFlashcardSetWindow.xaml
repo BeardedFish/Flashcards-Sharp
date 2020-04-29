@@ -141,7 +141,7 @@
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Flashcards in Set:"/>
+                        <TextBlock Margin="0,0,0,2.5" Text="Flashcards in Set:"/>
                         <ListBox x:Name="flashcardsSetListBox" Grid.Row="1"/>
 
                         <Button x:Name="moveFlashcardUpButton" Grid.Row="3" Content="Move Selected Flashcard Up" Click="MoveFlashcardUpButton_Click"/>
