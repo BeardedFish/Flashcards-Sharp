@@ -201,8 +201,7 @@ namespace FlashcardsSharp
                         UpdateFlashcardUI();
 
                         // Let the user know the flashcard set was loaded succesfully
-                        MessageBox.Show("Flashcard set loaded succesfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                        
+                        MessageBox.Show("Flashcard set loaded succesfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);    
                     }
                 }
                 catch (Exception ex)
@@ -239,7 +238,6 @@ namespace FlashcardsSharp
                 flashcardsListCurrentIndex = 0;
 
                 ToggleUnloadCurrentSetButton();
-
                 UpdateFlashcardUI();
             }
         }

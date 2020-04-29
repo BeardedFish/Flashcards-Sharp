@@ -125,8 +125,8 @@ namespace FlashcardsSharp
                 flashcards.Add(flashcard);
             }
 
+            // Create a FlashcardSet object with the details of the flashcard set and serilize it to JSON text
             FlashcardSet flashcardSet = new FlashcardSet(setNameText.Text, flashcards);
-
             string flashcardsSetJson = JsonSerializer.Serialize(flashcardSet);
 
             // Save it to a specified location that the user chooses
@@ -137,7 +137,10 @@ namespace FlashcardsSharp
             {
                 try
                 {
+                    // Write the JSON text to the save file path
                     File.WriteAllText(saveDialog.FileName, flashcardsSetJson);
+
+                    MessageBox.Show("Flashcard set saved succesfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
