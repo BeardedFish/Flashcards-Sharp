@@ -83,6 +83,7 @@
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Foreground" Value="#646469"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
 
             <Setter Property="Template">
                 <Setter.Value>
