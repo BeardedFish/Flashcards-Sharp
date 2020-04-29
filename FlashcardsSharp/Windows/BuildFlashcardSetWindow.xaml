@@ -151,7 +151,7 @@
                 </Grid>
             </Border>
 
-            <Button Style="{StaticResource PinkButton}" x:Name="saveFlashcardSetButton" Grid.Column="1" Grid.Row="3" Content="Save Flashcard Set" HorizontalAlignment="Right" Height="50" Width="200" Click="SaveFlashcardSetButton_Click"/>
+            <Button Style="{StaticResource GreenButton}" x:Name="saveFlashcardSetButton" Grid.Column="1" Grid.Row="3" Content="Save Flashcard Set" HorizontalAlignment="Right" Height="50" Width="200" Click="SaveFlashcardSetButton_Click"/>
         </Grid>
     </Grid>
 </Window>

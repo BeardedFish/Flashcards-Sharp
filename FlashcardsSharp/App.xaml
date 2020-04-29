@@ -5,27 +5,26 @@
              StartupUri="Windows/MainWindow.xaml">
     <Application.Resources>
         <BitmapImage x:Key="TransparentWhiteIcon" UriSource="Resources/FlashcardWhiteIcon.png"/>
-
+        <SolidColorBrush x:Key="DisabledBackground" Color="#d7d7d7"/>
+        
+        <!-- BEGIN CUSTOM BUTTON DESIGNS -->
+        
+        <!-- Regular button (white and gray) -->
         <Style TargetType="Button">
             <Style.Resources>
                 <LinearGradientBrush x:Key="DefaultBackground" StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#FFF" Offset="0"/>
-                    <GradientStop Color="#d7d7d7" Offset="1"/>
+                    <GradientStop Color="#D7D7D7" Offset="1"/>
                 </LinearGradientBrush>
 
                 <LinearGradientBrush x:Key="HoverBackground" StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#f5f5f5" Offset="0"/>
+                    <GradientStop Color="#F5F5F5" Offset="0"/>
                     <GradientStop Color="#BEBEBE" Offset="1"/>
                 </LinearGradientBrush>
 
                 <LinearGradientBrush x:Key="ClickedBackground" StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#BEBEBE " Offset="0"/>
-                    <GradientStop Color="#f5f5f5" Offset="1"/>
-                </LinearGradientBrush>
-
-                <LinearGradientBrush x:Key="DisabledBackground" StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#f5f5f5" Offset="0"/>
-                    <GradientStop Color="#f5f5f5" Offset="1"/>
+                    <GradientStop Color="#F5F5F5" Offset="1"/>
                 </LinearGradientBrush>
             </Style.Resources>
 
@@ -61,26 +60,22 @@
             </Setter>
         </Style>
 
+        <!-- Menu button (white and gray) -->
         <Style x:Key="MenuButton" TargetType="Button">
             <Style.Resources>
                 <LinearGradientBrush x:Key="DefaultBackground" StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#FFF" Offset="0"/>
-                    <GradientStop Color="#d7d7d7" Offset="1"/>
+                    <GradientStop Color="#D7D7D7" Offset="1"/>
                 </LinearGradientBrush>
 
                 <LinearGradientBrush x:Key="HoverBackground" StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#f5f5f5" Offset="0"/>
+                    <GradientStop Color="#F5F5F5" Offset="0"/>
                     <GradientStop Color="#BEBEBE" Offset="1"/>
                 </LinearGradientBrush>
 
                 <LinearGradientBrush x:Key="ClickedBackground" StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#BEBEBE " Offset="0"/>
-                    <GradientStop Color="#f5f5f5" Offset="1"/>
-                </LinearGradientBrush>
-
-                <LinearGradientBrush x:Key="DisabledBackground" StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#d7d7d7" Offset="0"/>
-                    <GradientStop Color="#d7d7d7" Offset="1"/>
+                    <GradientStop Color="#F5F5F5" Offset="1"/>
                 </LinearGradientBrush>
             </Style.Resources>
 
@@ -117,26 +112,22 @@
             </Setter>
         </Style>
 
-        <Style x:Key="PinkButton" TargetType="Button">
+        <!-- Green button -->
+        <Style x:Key="GreenButton" TargetType="Button">
             <Style.Resources>
                 <LinearGradientBrush x:Key="DefaultBackground" StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#1ef078" Offset="0"/>
-                    <GradientStop Color="#28aa64" Offset="1"/>
+                    <GradientStop Color="#1EF078" Offset="0"/>
+                    <GradientStop Color="#28AA64" Offset="1"/>
                 </LinearGradientBrush>
 
                 <LinearGradientBrush x:Key="HoverBackground" StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#E14B5A" Offset="0"/>
-                    <GradientStop Color="#D2232D" Offset="1"/>
+                    <GradientStop Color="#05D75F" Offset="0"/>
+                    <GradientStop Color="#0F914B" Offset="1"/>
                 </LinearGradientBrush>
 
                 <LinearGradientBrush x:Key="ClickedBackground" StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#D2232D" Offset="0"/>
-                    <GradientStop Color="#E14B5A" Offset="1"/>
-                </LinearGradientBrush>
-
-                <LinearGradientBrush x:Key="DisabledBackground" StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#d7d7d7" Offset="0"/>
-                    <GradientStop Color="#d7d7d7" Offset="1"/>
+                    <GradientStop Color="#0F914B" Offset="0"/>
+                    <GradientStop Color="#05D75F" Offset="1"/>
                 </LinearGradientBrush>
             </Style.Resources>
 
@@ -172,5 +163,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- END CUSTOM BUTTON DESIGNS -->
     </Application.Resources>
 </Application>
