@@ -27,10 +27,8 @@ namespace FlashcardsSharp
         /// <param name="e">The event arguments for when the button is clicked.</param>
         private void CreateFlashcardsSetButton_Click(object sender, RoutedEventArgs e)
         {
-            // Hide the main window
             this.Hide();
 
-            // Create and show the window
             BuildFlashcardSetWindow buildSetWindow = new BuildFlashcardSetWindow(this);
             buildSetWindow.Show();
         }
@@ -42,10 +40,8 @@ namespace FlashcardsSharp
         /// <param name="e">The event arguments for when the button is clicked.</param>
         private void StudyFlashcardSetsButton_Click(object sender, RoutedEventArgs e)
         {
-            // Hide the main window
             this.Hide();
 
-            // Create and show the window
             StudyFlashcardSetWindow studySetWindow = new StudyFlashcardSetWindow(this);
             studySetWindow.Show();
         }

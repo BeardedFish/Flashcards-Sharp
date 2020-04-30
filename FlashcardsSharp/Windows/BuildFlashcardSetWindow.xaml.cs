@@ -28,7 +28,7 @@ namespace FlashcardsSharp
         /// <summary>
         /// Main constructor for building the 'BuildFlashcardSetWindow'.
         /// </summary>
-        /// <param name="mainWindow"></param>
+        /// <param name="mainWindow">Reference to the main window.</param>
         public BuildFlashcardSetWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -52,7 +52,6 @@ namespace FlashcardsSharp
         /// </summary>
         private void AddFlashcardToSet()
         {
-            // Don't add a flashcard to the list if either the term textbox or definition textbox is null or contains white space
             if (string.IsNullOrWhiteSpace(termText.Text) || string.IsNullOrWhiteSpace(definitionText.Text))
             {
                 MessageBox.Show("One of the fields is null or only contains whitespace! Please enter a valid value in the field.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -60,17 +59,12 @@ namespace FlashcardsSharp
                 return;
             }
 
-            // Create a Flashcard object containing the term and definition from the textboxes on the window
             Flashcard flashcard = new Flashcard(termText.Text, definitionText.Text);
-
-            // Add it to the listbox
             flashcardsSetListBox.Items.Add(flashcard);
 
-            // Clear the textboxes
             termText.Clear();
             definitionText.Clear();
 
-            // Toggle the enable/disable status of the buttons under the list box
             ToggleListBoxButtons();
         }
 
@@ -118,26 +112,22 @@ namespace FlashcardsSharp
                 return;
             }
 
-            // Serialize the entire listbox that contains the Flashcard objects
             List<Flashcard> flashcards = new List<Flashcard>();
             foreach (Flashcard flashcard in flashcardsSetListBox.Items)
             {
                 flashcards.Add(flashcard);
             }
 
-            // Create a FlashcardSet object with the details of the flashcard set and serilize it to JSON text
             FlashcardSet flashcardSet = new FlashcardSet(setNameText.Text, flashcards);
-            string flashcardsSetJson = JsonSerializer.Serialize(flashcardSet);
+            string flashcardsSetJson = JsonSerializer.Serialize(flashcardSet); // Serialize the 'flashcardSet' to JSON text
 
-            // Save it to a specified location that the user chooses
             SaveFileDialog saveDialog = new SaveFileDialog();
             saveDialog.Filter = HelperClass.DialogFilter;
 
-            if (saveDialog.ShowDialog() == true) // Ok button was pressed on the dialog
+            if (saveDialog.ShowDialog() == true) // Ok button was pressed on the save dialog, save the JSON text
             {
                 try
                 {
-                    // Write the JSON text to the save file path
                     File.WriteAllText(saveDialog.FileName, flashcardsSetJson);
 
                     MessageBox.Show("Flashcard set saved succesfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -157,9 +147,9 @@ namespace FlashcardsSharp
         private void RemoveSelectedFlashcardButton_Click(object sender, RoutedEventArgs e)
         {
             int selectedIndex = flashcardsSetListBox.SelectedIndex;
-
             flashcardsSetListBox.Items.RemoveAt(selectedIndex);
 
+            // Find a new list box index to select
             selectedIndex = (selectedIndex == 0 && flashcardsSetListBox.Items.Count >= 1) ? selectedIndex : --selectedIndex;
             if (selectedIndex >= 0)
             {
@@ -176,8 +166,7 @@ namespace FlashcardsSharp
         /// <param name="e">The event arguments for when the button is clicked.</param>
         private void MoveFlashcardUpButton_Click(object sender, RoutedEventArgs e)
         {
-            // Don't move the flashcard up if no item is selected in the list box
-            if (flashcardsSetListBox.SelectedItem == null)
+            if (flashcardsSetListBox.SelectedItem == null) // Don't move the flashcard up if no item is selected in the list box
             {
                 MessageBox.Show("No flashcard is selected! Please select a flashcard and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -185,17 +174,15 @@ namespace FlashcardsSharp
             }
 
             int selectedFlashcardIndex = flashcardsSetListBox.SelectedIndex;
-            int upperIndex = selectedFlashcardIndex - 1;
+            int upperIndex = selectedFlashcardIndex - 1; // Subtracting one since it points to the item above the selected index
 
             if (upperIndex < 0)
             {
                 upperIndex = flashcardsSetListBox.Items.Count - 1;
             }
 
-            // Swap the elements
             SwapFlashcards(selectedFlashcardIndex, upperIndex);
 
-            // Update the selected item index
             flashcardsSetListBox.SelectedItem = flashcardsSetListBox.Items.GetItemAt(upperIndex);
         }
 
@@ -206,8 +193,7 @@ namespace FlashcardsSharp
         /// <param name="e">The event arguments for when the button is clicked.</param>
         private void MoveFlashcardDownButton_Click(object sender, RoutedEventArgs e)
         {
-            // Don't move the flashcard down if no item is selected in the list box
-            if (flashcardsSetListBox.SelectedItem == null)
+            if (flashcardsSetListBox.SelectedItem == null) // Don't move the flashcard down if no item is selected in the list box
             {
                 MessageBox.Show("No flashcard is selected! Please select a flashcard and try again.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -215,17 +201,15 @@ namespace FlashcardsSharp
             }
 
             int selectedFlashcardIndex = flashcardsSetListBox.SelectedIndex;
-            int lowerIndex = selectedFlashcardIndex + 1;
+            int lowerIndex = selectedFlashcardIndex + 1; // Adding one since it points to the item below the selected index
 
             if (lowerIndex >= flashcardsSetListBox.Items.Count)
             {
                 lowerIndex = 0;
             }
 
-            // Swap the elements
             SwapFlashcards(selectedFlashcardIndex, lowerIndex);
 
-            // Update the selected item index
             flashcardsSetListBox.SelectedItem = flashcardsSetListBox.Items.GetItemAt(lowerIndex);
         }
 
@@ -236,7 +220,6 @@ namespace FlashcardsSharp
         /// <param name="e"></param>
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            // Add a flashcard to the set list if the user presses the enter key
             if (e.Key == Key.Enter)
             {
                 AddFlashcardToSet();

@@ -53,8 +53,7 @@ namespace FlashcardsSharp
 
             this.mainWindow = mainWindow;
 
-            // Make the term be the first thing that shows up on the GUI
-            currentFlashcardState = FlashcardState.Term;
+            currentFlashcardState = FlashcardState.Term; // Make the term be the first thing the user sees for the first flashcard loaded
         }
 
         /// <summary>
@@ -83,13 +82,12 @@ namespace FlashcardsSharp
                 flashcardContainer.Cursor = Cursors.Hand;
             }
 
-            // Update the flashcard set title
             setTitle.Text = currentFlashcardSet.SetName;
 
             UpdateProgressText();
             ToggleNavigationButtons();
 
-            // Update the flashcard text depending on which side is visible
+            // Update the flashcard text on the GUI depending on which side is visible
             Flashcard currentFlashcard = currentFlashcardSet.FlashcardsList[flashcardsListCurrentIndex];
             flashcardText.Text = (currentFlashcardState == FlashcardState.Term) ? currentFlashcard.Term : currentFlashcard.Definition;
             flashcardText.FontWeight = (currentFlashcardState == FlashcardState.Term) ? FontWeights.Bold : FontWeights.Normal; // Definition is bold while term is normal font weight
@@ -119,10 +117,9 @@ namespace FlashcardsSharp
         /// <returns>A boolean that states whether the flashcard set is loaded in the program or not.</returns>
         private bool AlreadyLoaded(FlashcardSet flashcardSet)
         {
-            // Iterate through each flashcard set in the list box and see if there is a duplicate, if there is, that means that the flashcard set is already loaded
             foreach (FlashcardSet fs in flashcardSetListBox.Items)
             {
-                if (flashcardSet.Equals(fs))
+                if (flashcardSet.Equals(fs)) // Duplicate found
                 {
                     return true;
                 }
@@ -138,75 +135,56 @@ namespace FlashcardsSharp
         /// <param name="e">The event arguments for when the button is clicked.</param>
         private void LoadSetButton_Click(object sender, RoutedEventArgs e)
         {
-            // Save it to a specified location that the user chooses
             OpenFileDialog openDialog = new OpenFileDialog();
             openDialog.Filter = HelperClass.DialogFilter;
 
             if (openDialog.ShowDialog() == true) // Ok button was pressed on the dialog
             {
-                // String for storing the text contents of the file to be loaded in (which should be JSON)
-                string fileText = "";
-
                 try
                 {
-                    fileText = File.ReadAllText(openDialog.FileName);
+                    string fileText = File.ReadAllText(openDialog.FileName);
 
-                    // Try and deserialize the JSON into flashcard objects
+                    // Extract the information about the flashcard set from the JSON text
                     using (JsonDocument document = JsonDocument.Parse(fileText))
                     {
-                        // Get the root element in the text file
                         JsonElement root = document.RootElement;
 
-                        // Get the set name and store it in a string
                         string setName = root.GetProperty(HelperClass.SetNameJsonPropertyName).ToString();
 
-                        // Declare a list for storing flashcards that were read in from the JSON file
+                        // Get the flashcards in the JSON
                         List<Flashcard> flashcardsList = new List<Flashcard>();
-
-                        // Extract every flashcard from the list and add it to the list
-                        JsonElement flashcards = root.GetProperty(HelperClass.FlashcardsListJsonPropertyName);
-                        foreach (JsonElement element in flashcards.EnumerateArray())
+                        foreach (JsonElement element in root.GetProperty(HelperClass.FlashcardsListJsonPropertyName).EnumerateArray())
                         {
-                            // Extract the term and definition and store them in a string variables
                             string term = element.GetProperty(HelperClass.TermJsonPropertyName).ToString();
                             string definition = element.GetProperty(HelperClass.DefinitionJsonPropertyName).ToString();
 
-                            // Create flashcard object and add it to the list
                             Flashcard flashcard = new Flashcard(term, definition);
                             flashcardsList.Add(flashcard);
                         }
 
-                        // Convert the items loaded from the file to a FlashcardSet object
                         FlashcardSet set = new FlashcardSet(setName, flashcardsList);
 
-                        // If the flashcard set is already loaded, prompt the user to make sure that that want to load in the flashcard set again
-                        if (AlreadyLoaded(set))
+                        if (AlreadyLoaded(set)) // If the flashcard set is already loaded, prompt the user to make sure that that want to load in the flashcard set again
                         {
                             MessageBoxResult msgResult = MessageBox.Show("Flashcard set has already been loaded into the program! Are you sure you still want to load in flashcard set?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                            if (msgResult == MessageBoxResult.No) // User does not want to load in the flashcard set again that is already loaded in, therefore, return from the method
+                            if (msgResult == MessageBoxResult.No)
                             {
                                 return;
                             }
                         }
 
-                        // Add the FlashcardSet object into the list
                         flashcardSetListBox.Items.Add(set);
-
-                        // Set it as the current flashcard the user can interact with
                         currentFlashcardSet = set;
 
-                        // Update the UI to show the changes visually
                         ToggleUnloadCurrentSetButton();
                         UpdateFlashcardUI();
 
-                        // Let the user know the flashcard set was loaded succesfully
                         MessageBox.Show("Flashcard set loaded succesfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);    
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Show message to the user
                     MessageBox.Show("An error occured while trying to parse the file '" + openDialog.FileName + "' which resulted in the flashcard set not being loaded into the program.\n\nException message: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
@@ -222,7 +200,6 @@ namespace FlashcardsSharp
             if (flashcardSetListBox.Items.Count > 0)
             {
                 int selectedIndex = flashcardSetListBox.Items.IndexOf(currentFlashcardSet);
-
                 flashcardSetListBox.Items.RemoveAt(selectedIndex);
 
                 if (flashcardSetListBox.Items.Count > 0)
@@ -249,13 +226,12 @@ namespace FlashcardsSharp
         /// <param name="e">The event arguments for flashcard container is clicked.</param>
         private void FlashcardContainer_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            // Don't do anything if no flashcard is currently loaded for studying
             if (currentFlashcardSet == null)
             {
                 return;
             }
 
-            // Toggle the visibility state of the term and definition of the flashcard
+            // Toggle the visibility state of the term and definition of the current flashcard
             currentFlashcardState = (currentFlashcardState == FlashcardState.Definition) ? FlashcardState.Term : FlashcardState.Definition;
 
             UpdateFlashcardUI();
@@ -270,8 +246,6 @@ namespace FlashcardsSharp
         {
             // Go to the previous index in the flashcard list (if there is one)
             flashcardsListCurrentIndex--;
-
-            // Prevent out of bounds if the user is already at the first flashcard in the set
             if (flashcardsListCurrentIndex < 0)
             {
                 flashcardsListCurrentIndex = 0;
@@ -279,8 +253,8 @@ namespace FlashcardsSharp
                 return;
             }
 
-            // Show the term of the flashcard and update the UI to show the changes
             currentFlashcardState = FlashcardState.Term;
+
             UpdateFlashcardUI();
         }
 
@@ -293,8 +267,6 @@ namespace FlashcardsSharp
         {
             // Go to the next index in the flashcard list (if there is one)
             flashcardsListCurrentIndex++;
-
-            // Prevent out of bounds if there is no more flashcards in the set
             if (flashcardsListCurrentIndex >= currentFlashcardSet.FlashcardsList.Count)
             {
                 flashcardsListCurrentIndex = currentFlashcardSet.FlashcardsList.Count - 1;
@@ -302,8 +274,8 @@ namespace FlashcardsSharp
                 return;
             }
 
-            // Show the term of the flashcard and update the UI to show the changes
             currentFlashcardState = FlashcardState.Term;
+
             UpdateFlashcardUI();
         }
 
@@ -319,7 +291,6 @@ namespace FlashcardsSharp
             currentFlashcardState = FlashcardState.Term;
             flashcardsListCurrentIndex = 0;
 
-            // Update the UI to show the change
             UpdateFlashcardUI();
         }
 
@@ -336,8 +307,7 @@ namespace FlashcardsSharp
 
                 if (MessageBox.Show("Are you sure you want to exit the window? " + loadedFlashcardMessage + " loaded in the program.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                 {
-                    // Set this to true to cancel the window from closing
-                    e.Cancel = true;
+                    e.Cancel = true; // Set this to true to cancel the window from closing
 
                     return;
                 }
