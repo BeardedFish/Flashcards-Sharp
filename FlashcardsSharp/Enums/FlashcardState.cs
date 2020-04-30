@@ -1,6 +1,6 @@
 ﻿/*
  * File Name: FlashcardState.cs
- * Purpose:
+ * Purpose: An enum that serves as the visiblity state for which flashcard face should be shown to the user on the GUI.
  * Coder: Darian Benam
  * GitHub: https://github.com/BeardedFish
  * Date Created: Friday, April 24, 2020
