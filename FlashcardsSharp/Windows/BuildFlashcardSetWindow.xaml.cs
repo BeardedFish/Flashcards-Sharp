@@ -43,8 +43,8 @@ namespace FlashcardsSharp
         private void ToggleListBoxButtons()
         {
             // Use ternary operator to set the list box button enable states
-            moveFlashcardDownButton.IsEnabled = moveFlashcardUpButton.IsEnabled = flashcardsSetListBox.Items.Count > 1 ? true : false;
-            removeSelectedFlashcardButton.IsEnabled = flashcardsSetListBox.Items.Count > 0 ? true : false;
+            moveFlashcardDownButton.IsEnabled = moveFlashcardUpButton.IsEnabled = flashcardsSetListBox.Items.Count > 1;
+            removeSelectedFlashcardButton.IsEnabled = flashcardsSetListBox.Items.Count > 0;
         }
 
         /// <summary>

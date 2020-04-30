@@ -100,8 +100,8 @@ namespace FlashcardsSharp
         /// </summary>
         private void ToggleNavigationButtons()
         {
-            previousFlashcardButton.IsEnabled = (flashcardsListCurrentIndex > 0) ? true : false;
-            nextFlashcardButton.IsEnabled = (flashcardsListCurrentIndex < (currentFlashcardSet == null ? -1 : currentFlashcardSet.FlashcardsList.Count - 1)) ? true : false;
+            previousFlashcardButton.IsEnabled = (flashcardsListCurrentIndex > 0);
+            nextFlashcardButton.IsEnabled = (flashcardsListCurrentIndex < (currentFlashcardSet == null ? -1 : currentFlashcardSet.FlashcardsList.Count - 1));
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace FlashcardsSharp
         /// </summary>
         private void ToggleUnloadCurrentSetButton()
         {
-            unloadCurrentSetButton.IsEnabled = (flashcardSetListBox.Items.Count > 0) ? true : false;
+            unloadCurrentSetButton.IsEnabled = (flashcardSetListBox.Items.Count > 0);
         }
 
         /// <summary>
