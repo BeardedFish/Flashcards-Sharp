@@ -48,8 +48,7 @@ namespace FlashcardsSharp
         public StudyFlashcardSetWindow(MainWindow mainWindow)
         {
             InitializeComponent();
-            ToggleUnloadCurrentSetButton();
-            ToggleNavigationButtons();
+            UpdateFlashcardUI();
 
             this.mainWindow = mainWindow;
 
@@ -61,7 +60,8 @@ namespace FlashcardsSharp
         /// </summary>
         private void UpdateProgressText()
         {
-            progressText.Text = (flashcardsListCurrentIndex + 1) + "/" + currentFlashcardSet.FlashcardsList.Count;
+            string progress = (currentFlashcardSet == null) ? "0/0" : (flashcardsListCurrentIndex + 1) + "/" + currentFlashcardSet.FlashcardsList.Count;
+            progressText.Text = progress;
         }
 
         /// <summary>
@@ -69,6 +69,10 @@ namespace FlashcardsSharp
         /// </summary>
         private void UpdateFlashcardUI()
         {
+            UpdateProgressText();
+            ToggleNavigationButtons();
+            ToggleUnloadCurrentSetButton();
+
             if (currentFlashcardSet == null || currentFlashcardSet.FlashcardsList.Count == 0) // If no flashcard is loaded, set the cursor for the flashcard container to the "No" cursor
             {
                 flashcardContainer.Cursor = Cursors.No;
@@ -83,9 +87,6 @@ namespace FlashcardsSharp
             }
 
             setTitle.Text = currentFlashcardSet.SetName;
-
-            UpdateProgressText();
-            ToggleNavigationButtons();
 
             // Update the flashcard text on the GUI depending on which side is visible
             Flashcard currentFlashcard = currentFlashcardSet.FlashcardsList[flashcardsListCurrentIndex];
@@ -229,7 +230,6 @@ namespace FlashcardsSharp
                         flashcardSetListBox.SelectedItem = set;
                         flashcardsListCurrentIndex = 0;
 
-                        ToggleUnloadCurrentSetButton();
                         UpdateFlashcardUI();
 
                         MessageBox.Show("Flashcard set loaded succesfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -266,7 +266,6 @@ namespace FlashcardsSharp
                 currentFlashcardState = FlashcardState.Term;
                 flashcardsListCurrentIndex = 0;
 
-                ToggleUnloadCurrentSetButton();
                 UpdateFlashcardUI();
             }
         }
