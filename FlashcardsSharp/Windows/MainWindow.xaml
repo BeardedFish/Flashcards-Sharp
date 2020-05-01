@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FlashcardsSharp"
         mc:Ignorable="d" FontFamily="Segoe UI" FontWeight="Light"
         Title="Flashcards Sharp - Home" Height="600" Width="700" MinHeight="600" MinWidth="700" 
-        FontSize="16" Background="#fAFAFA" WindowStartupLocation="CenterScreen">
+        FontSize="16" Background="#FAFAFA" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="25"/>

@@ -216,8 +216,8 @@ namespace FlashcardsSharp
         /// <summary>
         /// Event handler for when a key is held down on the window.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments for when the key is held down.</param>
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Enter)

@@ -89,7 +89,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Text="Flashcard Sets:"/>
-                            <ListBox x:Name="flashcardSetListBox"  Grid.Row="1" SelectionChanged="FlashcardSetListBox_SelectionChanged"/>
+                            <ListBox x:Name="flashcardSetListBox" Grid.Row="1" Focusable="True" SelectionChanged="FlashcardSetListBox_SelectionChanged"/>
                             <Button x:Name="loadSetButton" Grid.Row="3" Content="Load Set" Click="LoadSetButton_Click"/>
                             <Button x:Name="unloadCurrentSetButton" Grid.Row="5" Content="Unload Current Set" Click="UnloadCurrentSetButton_Click"/>
                         </Grid>
@@ -126,13 +126,13 @@
                         <Button x:Name="previousFlashcardButton" Grid.Row="2" FontSize="24" Content="&#8592;" Click="PreviousFlashcardButton_Click"/>
 
                         <!-- Flashcard -->
-                        <Border x:Name="flashcardContainer" Cursor="No" Grid.Column="2" Grid.Row="2" CornerRadius="0" Background="#fafafa" MouseLeftButtonUp="FlashcardContainer_MouseLeftButtonUp">
+                        <Border x:Name="flashcardContainer" Cursor="No" Grid.Column="2" Grid.Row="2" CornerRadius="0" Background="#fafafa" Focusable="true" FocusVisualStyle="{x:Null}" MouseLeftButtonUp="FlashcardContainer_MouseLeftButtonUp" KeyDown="FlashcardContainer_KeyDown">
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.5"/>
                             </Border.Effect>
-
+                            
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                <TextBlock x:Name="flashcardText" Foreground="#7D7D7D" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Padding="25" Text=""/>
+                                <TextBlock x:Name="flashcardText" Foreground="#7D7D7D" FontSize="24" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Padding="25" Text=""/>
                             </ScrollViewer>
                         </Border>
 

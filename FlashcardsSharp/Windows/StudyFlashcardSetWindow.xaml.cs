@@ -129,6 +129,57 @@ namespace FlashcardsSharp
         }
 
         /// <summary>
+        /// Goes to the previous flashcard in the current set (if there is one).
+        /// </summary>
+        private void PreviousFlashcard()
+        {
+            flashcardsListCurrentIndex--;
+            if (flashcardsListCurrentIndex < 0)
+            {
+                flashcardsListCurrentIndex = 0;
+
+                return;
+            }
+
+            currentFlashcardState = FlashcardState.Term;
+
+            UpdateFlashcardUI();
+        }
+
+        /// <summary>
+        /// Goes to the next flashcard in the current set (if there is one).
+        /// </summary>
+        private void NextFlashcard()
+        {
+            flashcardsListCurrentIndex++;
+            if (flashcardsListCurrentIndex >= currentFlashcardSet.FlashcardsList.Count)
+            {
+                flashcardsListCurrentIndex = currentFlashcardSet.FlashcardsList.Count - 1;
+
+                return;
+            }
+
+            currentFlashcardState = FlashcardState.Term;
+
+            UpdateFlashcardUI();
+        }
+
+        /// <summary>
+        /// Toggles the current flashcard face between the term and definition.
+        /// </summary>
+        private void ToggleFlashcardFace()
+        {
+            if (currentFlashcardSet == null)
+            {
+                return;
+            }
+
+            currentFlashcardState = (currentFlashcardState == FlashcardState.Definition) ? FlashcardState.Term : FlashcardState.Definition;
+
+            UpdateFlashcardUI();
+        }
+
+        /// <summary>
         /// Event handler for when the "Load Flashcard Set" button is clicked.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
@@ -175,12 +226,13 @@ namespace FlashcardsSharp
                         }
 
                         flashcardSetListBox.Items.Add(set);
-                        currentFlashcardSet = set;
+                        flashcardSetListBox.SelectedItem = set;
+                        flashcardsListCurrentIndex = 0;
 
                         ToggleUnloadCurrentSetButton();
                         UpdateFlashcardUI();
 
-                        MessageBox.Show("Flashcard set loaded succesfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);    
+                        MessageBox.Show("Flashcard set loaded succesfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 catch (Exception ex)
@@ -226,15 +278,9 @@ namespace FlashcardsSharp
         /// <param name="e">The event arguments for flashcard container is clicked.</param>
         private void FlashcardContainer_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (currentFlashcardSet == null)
-            {
-                return;
-            }
+            flashcardContainer.Focus();
 
-            // Toggle the visibility state of the term and definition of the current flashcard
-            currentFlashcardState = (currentFlashcardState == FlashcardState.Definition) ? FlashcardState.Term : FlashcardState.Definition;
-
-            UpdateFlashcardUI();
+            ToggleFlashcardFace();
         }
 
         /// <summary>
@@ -244,18 +290,7 @@ namespace FlashcardsSharp
         /// <param name="e">The event arguments for when the button is clicked.</param>
         private void PreviousFlashcardButton_Click(object sender, RoutedEventArgs e)
         {
-            // Go to the previous index in the flashcard list (if there is one)
-            flashcardsListCurrentIndex--;
-            if (flashcardsListCurrentIndex < 0)
-            {
-                flashcardsListCurrentIndex = 0;
-
-                return;
-            }
-
-            currentFlashcardState = FlashcardState.Term;
-
-            UpdateFlashcardUI();
+            PreviousFlashcard();
         }
 
         /// <summary>
@@ -265,18 +300,7 @@ namespace FlashcardsSharp
         /// <param name="e">The event arguments for when the button is clicked.</param>
         private void NextFlashcardButton_Click(object sender, RoutedEventArgs e)
         {
-            // Go to the next index in the flashcard list (if there is one)
-            flashcardsListCurrentIndex++;
-            if (flashcardsListCurrentIndex >= currentFlashcardSet.FlashcardsList.Count)
-            {
-                flashcardsListCurrentIndex = currentFlashcardSet.FlashcardsList.Count - 1;
-
-                return;
-            }
-
-            currentFlashcardState = FlashcardState.Term;
-
-            UpdateFlashcardUI();
+            NextFlashcard();
         }
 
         /// <summary>
@@ -295,10 +319,10 @@ namespace FlashcardsSharp
         }
 
         /// <summary>
-        /// Event handler for the window is closing.
+        /// Event handler for when the window is closing.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
-        /// <param name="e"></param>
+        /// <param name="e">The event arguments for when the window is closing.</param>
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             if (currentFlashcardSet != null && currentFlashcardSet.FlashcardsList.Count > 0) // Show warning message if the user has a flashcard set currently loaded
@@ -314,6 +338,40 @@ namespace FlashcardsSharp
             }
 
             mainWindow.Show();
+        }
+
+        /// <summary>
+        /// Event handler for when a key is held down on the flashcard container.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments for when the key is held down.</param>
+        private void FlashcardContainer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (currentFlashcardSet == null)
+            {
+                return;
+            }
+
+            if (e.Key == Key.Left || e.Key == Key.PageDown || e.Key == Key.Right || e.Key == Key.PageUp
+                || e.Key == Key.Up || e.Key == Key.Down || e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+
+            if (e.Key == Key.Left || e.Key == Key.PageDown) // Go to previous flashcard in the current set
+            {
+                PreviousFlashcard();
+            }
+
+            if (e.Key == Key.Right || e.Key == Key.PageUp) // Go to next flashcard in current set
+            {
+                NextFlashcard();
+            }
+
+            if (e.Key == Key.Up || e.Key == Key.Down || e.Key == Key.Space) // Toggle term/definition face of current flashcard
+            {
+                ToggleFlashcardFace();
+            }
         }
     }
 }
