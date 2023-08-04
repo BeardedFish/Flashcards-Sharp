@@ -1,0 +1,17 @@
+name: Build
+
+on: [ push, pull_request ]
+
+jobs:
+    build:
+        runs-on: windows-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Setup Microsoft Build Engine
+              uses: microsoft/setup-msbuild@v1.1
+
+            - name: Build Flashcards Sharp Binary
+              run: |
+                msbuild ./FlashcardsSharp/FlashcardsSharp.sln /t:"Restore;Build" /p:RestorePackagesConfig=True /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="Release"
